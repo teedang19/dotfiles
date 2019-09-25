@@ -15,5 +15,5 @@ alias gcm="git commit -m"
 alias gpsh="git push"
 alias gwip="git add . && git commit -m 'WIP'"
 alias grwip="git reset --soft HEAD~1 && git reset"
-alias gl="git log"
-
+alias gl="git log --pretty='%Cred%cd %Cgreen%h %C(green bold)%s %Creset%C(yellow)[%cn]' --date=short"
+alias gplr="git pull --rebase"
