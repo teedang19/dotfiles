@@ -14,7 +14,7 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias ga="git add ."
 alias gcm="git commit -m"
-alias gpsh="git push"
+alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
 alias gwip="git add . && git commit -m 'WIP'"
 alias grwip="git reset --soft HEAD~1 && git reset"
 alias gl="git log --pretty='%Cred%cd %Cgreen%h %C(green bold)%s %Creset%C(yellow)[%cn]' --date=short"
