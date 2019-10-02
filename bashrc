@@ -21,3 +21,5 @@ alias gl="git log --pretty='%Cred%cd %Cgreen%h %C(green bold)%s %Creset%C(yellow
 alias gplr="git pull --rebase"
 
 alias be="bundle exec"
+
+alias "vundle"="vim +PluginInstall +qall" # installs plugins listing in .vimrc

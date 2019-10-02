@@ -5,6 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'       " let Vundle manage Vundle
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()                   " All of your Plugins must be added before the following line
 filetype plugin indent on
