@@ -1,16 +1,4 @@
-set nocompatible                    " be iMproved, required
-
-set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'       " let Vundle manage Vundle
-Plugin 'scrooloose/nerdtree'
-
-call vundle#end()                   " All of your Plugins must be added before the following line
-filetype plugin indent on
-
-syntax on                           " Enable syntax highlighting
-
+set nocompatible                    " from Vundle
 set number                          " Show line numbers
 set nowrap                          " Do not wrap lines
 set noswapfile                      " Disable creation of *.swp files
@@ -29,7 +17,28 @@ set smartcase                       " ...unless we type a capital
 
 let mapleader=","
 
+syntax on                           " Enable syntax highlighting
 
+" ============================================================================
+set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'       " let Vundle manage vim plugins
+Plugin 'scrooloose/nerdtree'
+
+call vundle#end()                   " All of your Plugins must be added before the following line
+filetype plugin indent on
+" ============================================================================
+" Remap window navigation from Ctrl-W + direction to just Ctrl+direction
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-l> <C-w>l
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-j> <C-w>j
+" ============================================================================
+" Remap vertical split to vv and horizontal split to ss
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+" ============================================================================
 " Opens NERDTree, expose current file with Ctrl + \ (backslash)
 " calls NERDTreeFind if
 "   + NERDTree is active,
@@ -44,3 +53,4 @@ function! OpenNerdTree()
   endif
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
+" ============================================================================
