@@ -1,5 +1,4 @@
 set nocompatible                    " be iMproved, required
-filetype off                        " required
 
 set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
 call vundle#begin()
@@ -29,3 +28,19 @@ set ignorecase                      " Ignore case when searching...
 set smartcase                       " ...unless we type a capital
 
 let mapleader=","
+
+
+" Opens NERDTree, expose current file with Ctrl + \ (backslash)
+" calls NERDTreeFind if
+"   + NERDTree is active,
+"   + current window contains a modifiable file
+"   + we're not in vimdiff
+
+function! OpenNerdTree()
+  if &modifiable && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+  else
+    NERDTreeToggle
+  endif
+endfunction
+nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
