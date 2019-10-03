@@ -35,7 +35,7 @@ set guifont=Menlo\ Regular:h18
 
 let mapleader=","
 
-colorscheme monokai
+colorscheme jellybeans
 " ============================================================================
 " Window navigation can be done with just Ctrl+direction(h,j,k,l)
 nnoremap <silent> <C-h> <C-w>h
