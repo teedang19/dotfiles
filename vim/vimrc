@@ -4,14 +4,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tomtom/tcomment_vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " super fast file searching
+Plug 'junegunn/fzf.vim' " super fast grepping
+Plug 'scrooloose/nerdtree' " Filetree explorer
+Plug 'tpope/vim-fugitive' " Git blame
+Plug 'tomtom/tcomment_vim' " Comment toggling
 
 call plug#end()
 " ============================================================================
@@ -45,9 +44,6 @@ nnoremap <silent> <C-j> <C-w>j
 " `vv`for vertical split, `ss` for horizontal split
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
-
-" Ctrl+S will :wa
-nnoremap <silent> <C-s> :wa<cr>
 
 " Fuzzy file search via <Leader>t; search in buffers via <Leader>b
 nnoremap <silent> <Leader>t :FZF<cr>
