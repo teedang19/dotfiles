@@ -22,4 +22,4 @@ alias gplr="git pull --rebase"
 
 alias be="bundle exec"
 
-alias "vundle"="vim +PluginInstall +qall" # installs plugins listing in .vimrc
+alias vplug="vim +PlugInstall +qall"
