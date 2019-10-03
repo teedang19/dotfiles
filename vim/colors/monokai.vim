@@ -1,3 +1,5 @@
+" symlink ~/.vim/colors to the path of the `colors` directory
+"
 " Vim color file
 " Converted from Textmate theme Monokai using Coloration v0.3.2 (http://github.com/sickill/coloration)
 " https://github.com/sickill/vim-monokai/blob/master/colors/monokai.vim

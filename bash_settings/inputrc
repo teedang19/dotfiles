@@ -1,2 +1,5 @@
+# symlink ~/.inputrc to the path of this file
+
+# Make bash autocomplete tabbing behave like zsh, i.e., a single <tab> press will list all available matches
 set show-all-if-ambiguous on
 set completion-ignore-case on
