@@ -60,6 +60,9 @@ map <silent> // :noh<CR>
 map ,jm :FZF app/models<CR>
 map ,jc :FZF app/controllers<CR>
 map ,jv :FZF app/views<CR>
+
+command! Q :q
+command! W :w
 " ============================================================================
 " Opens NERDTree, expose current file with Ctrl + \ (backslash)
 " calls NERDTreeFind if
