@@ -1,3 +1,5 @@
+# symlink ~/.bash_profile to the path of this file
+
 eval "$(rbenv init -)"
 
 git_branch() {
@@ -22,4 +24,4 @@ alias gplr="git pull --rebase"
 
 alias be="bundle exec"
 
-alias vplug="vim +PlugInstall +qall"
+alias vplug="vim +PlugInstall +qall" # install vim plugins
