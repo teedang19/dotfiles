@@ -69,6 +69,9 @@ nmap sk :SplitjoinJoin<cr>
 " Term search via <Leader>gg
 map <silent> <Leader>gg :Ag<cr>
 
+" Shift+k to search for the worder under the cursor
+nnoremap <silent> K :Ag <C-R><C-W><CR>
+
 " clear highlighting via //
 map <silent> // :nohlsearch<CR>
 
