@@ -20,11 +20,8 @@ Personal dotfiles
 3. Install vim plugins using the alias: `$ vplug`
 
 # TODO
-- autocomplete with recently used words in vim
 - more syntax highlighting
   - elixir
   - javascript, coffeescript, typescript
   - yaml
   - css
-- Ctrl+S to toggle corresponding file + spec
-- `:Q` and `:W` overrides
