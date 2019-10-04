@@ -15,6 +15,7 @@ Plug 'tpope/vim-fugitive' " Git blame
 Plug 'tpope/vim-surround' " Easy quotes/parenthesizing
 Plug 'tomtom/tcomment_vim' " Comment toggling
 Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blocks
+Plug 'Valloric/YouCompleteMe' " Autocomplete
 
 call plug#end()
 " ============================================================================
