@@ -105,6 +105,8 @@ set guioptions-=L
 " Disable the macvim toolbar
 set guioptions-=T
 
+nnoremap <silent> <Leader>r :NERDTreeRefresh<cr>
+
 " Opens NERDTree, expose current file with Ctrl + \ (backslash)
 " calls NERDTreeFind if
 "   + NERDTree is active,
