@@ -25,3 +25,5 @@ alias gplr="git pull --rebase"
 alias be="bundle exec"
 
 alias vplug="vim +PlugInstall +qall" # install vim plugins
+
+source "git-completion.bash"
