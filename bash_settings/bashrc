@@ -26,4 +26,4 @@ alias be="bundle exec"
 
 alias vplug="vim +PlugInstall +qall" # install vim plugins
 
-source "git-completion.bash"
+source ~/dev/dotfiles/git-completion.bash
