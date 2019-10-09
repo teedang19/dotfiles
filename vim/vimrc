@@ -73,14 +73,22 @@ nnoremap <silent> <Leader>k *
 " clear highlighting via //
 map <silent> // :nohlsearch<CR>
 
-map ,jm :FZF app/models<CR>
-map ,jc :FZF app/controllers<CR>
-map ,jv :FZF app/views<CR>
+" Leader jm|jc|jv to fuzzy file search within models, controllers, or views
+map <Leader>jm :FZF app/models<CR>
+map <Leader>jc :FZF app/controllers<CR>
+map <Leader>jv :FZF app/views<CR>
+
+" Leader+ff to fuzzy file search the word under the cursor ("find-file")
+nnoremap <Leader>ff :FzfTagsCurrWord<CR>
+command! FzfTagsCurrWord call s:FzfTagsCurrWord()
+function! s:FzfTagsCurrWord()
+  call fzf#vim#tags(expand('<cword>'))
+endfunction
 
 " copy current filename (cf: fullpath, cr: relative path, cn: filename) into system clipboard
-nnoremap <silent> ,cf :let @* = expand("%:~")<CR>
-nnoremap <silent> ,cr :let @* = expand("%")<CR>
-nnoremap <silent> ,cn :let @* = expand("%:t")<CR>
+nnoremap <silent> <Leader>cf :let @* = expand("%:~")<CR>
+nnoremap <silent> <Leader>cr :let @* = expand("%")<CR>
+nnoremap <silent> <Leader>cn :let @* = expand("%:t")<CR>
 
 " Use numbers to pick the tab you want (like iTerm)
 map <silent> <D-1> :tabn 1<cr>
