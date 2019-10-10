@@ -19,7 +19,7 @@ Personal dotfiles
 
 4. Install vim plugins using the alias: `$ vplug`
 
-5. $ git config --global core.excludesfile [path/to/this/file](https://github.com/teedang19/dotfiles/blob/master/git/gitignore_global)`
+5. $ git config --global core.excludesfile [path/to/this/file](https://github.com/teedang19/dotfiles/blob/master/git/gitignore_global)
 
 # TODO
 - more syntax highlighting
