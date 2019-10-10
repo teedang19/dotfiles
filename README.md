@@ -1,25 +1,28 @@
 Personal dotfiles
 
 # Getting Started
+1. Install [Homebrew](https://brew.sh/)
+
+1. Install [rbenv via homebrew](https://github.com/rbenv/rbenv#homebrew-on-macos)
+
+1. Install [vim-plug](https://github.com/junegunn/vim-plug#vim) to manage vim plugins
+
+1. Install [dependencies for YouCompleteMe](https://github.com/ycm-core/YouCompleteMe#installation), the vim autocomplete plugin
 
 1. Clone the repo to your desired location. For me, it's usually ~/dev/dotfiles:
   `git clone git@github.com:teedang19/dotfiles.git ~/dev/dotfiles`
 
-2. Create symlinks that point to the dotfiles repo:
-  + .bash_profile:
-`cd && ln -s ~/dev/dotfiles/bash_settings/bashrc .bash_profile`
-  + .inputrc:
-`cd && ln -s ~/dev/dotfiles/bash_settings/inputrc .inputrc`
-  + vimrc:
-`cd && ln -s ~/dev/dotfiles/vim/vimrc .vimrc`
-  + colors (vim):
-`cd && ln -s ~/dev/dotfiles/vim/colors /.vim/colors`
+1. Create symlinks that point to the dotfiles repo:
+    + .bash_profile: `cd && ln -s ~/dev/dotfiles/bash_settings/bashrc .bash_profile`
+    + .inputrc: `cd && ln -s ~/dev/dotfiles/bash_settings/inputrc .inputrc`
+    + vimrc: `cd && ln -s ~/dev/dotfiles/vim/vimrc .vimrc`
+    + colors (vim): `cd && ln -s ~/dev/dotfiles/vim/colors /.vim/colors`
 
-3. Reload vim and terminal for settings to take effect
+1. Reload vim and terminal for settings to take effect
 
-4. Install vim plugins using the alias: `$ vplug`
+1. Install vim plugins using the alias: `$ vplug`
 
-5. $ git config --global core.excludesfile [path/to/this/file](https://github.com/teedang19/dotfiles/blob/master/git/gitignore_global)
+1. $ git config --global core.excludesfile [path/to/this/file](https://github.com/teedang19/dotfiles/blob/master/git/gitignore_global)
 
 # TODO
 - more syntax highlighting
