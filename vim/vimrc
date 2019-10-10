@@ -16,30 +16,53 @@ Plug 'tpope/vim-surround' " Easy quotes/parenthesizing
 Plug 'tomtom/tcomment_vim' " Comment toggling
 Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blocks
 Plug 'Valloric/YouCompleteMe' " Autocomplete
+Plug 'dense-analysis/ale' " Async Lint Engine
 
 call plug#end()
 " ============================================================================
+syntax on
 set number                          " Show line numbers
 set nowrap                          " Do not wrap lines
 set noswapfile                      " Disable creation of *.swp files
 set tabstop=2                       " Two-space tabs
 set shiftwidth=2                    " Number of spaces to use in each autoindent step
-set softtabstop=2
+set softtabstop=2                   " Number of spaces to skip or insert when <BS>ing or <Tab>ing
 set smarttab                        " Use shiftwidth and softtabstop to insert or delete (on <BS>) blanks
-set expandtab
+set expandtab                       " Spaces instead of tabs for better cross-editor compatibility
+set cindent                         " Recommended seting for automatic C-style indentation
 set autoindent                      " Keep the indent when creating a new line
 set smartindent
-set smarttab
+set smarttab                        " Use shiftwidth and softtabstop to insert or delete (on <BS>) blanks
 set incsearch                       " Find the next match as we type the search
 set hlsearch                        " Highlight searches by default
 set ignorecase                      " Ignore case when searching...
 set smartcase                       " ...unless we type a capital
 set guifont=Menlo\ Regular:h18
+set wildmenu                        " Make tab completion act more like bash
+set wildmode=longest,list,full      " Tab complete to longest common string, like bash
+set completeopt+=longest            " Tab complete type to search
+set switchbuf=useopen               " Don't re-open already opened buffers
 
-let mapleader=","
+" Undo
+set undodir=$HOME/.vim-config/undodir
+set undofile
+set undolevels=10000
+set undoreload=10000
+
+" Use system clipboard
+set clipboard+=unnamed                     " Set system clipboard
+set mouse=a
 
 colorscheme jellybeans
+
+autocmd BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+
+" Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 " ============================================================================
+let mapleader=","
+
 " Window navigation can be done with just Ctrl+direction(h,j,k,l)
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
