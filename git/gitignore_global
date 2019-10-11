@@ -1,3 +1,16 @@
 # git config --global core.excludesfile path/to/this/file
 
 tags
+!tmp/cache/.keep
+**/.DS_Store
+*.DS_Store
+*.sw[nop]
+.DS_Store
+.bundle
+.gemtags
+.tags
+db/*.sqlite3
+log/*.log
+rerun.txt
+tmp/**/*
+zeus.json
