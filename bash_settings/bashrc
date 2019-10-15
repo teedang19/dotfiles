@@ -1,6 +1,7 @@
 # symlink ~/.bash_profile to the path of this file
 
 eval "$(rbenv init -)"
+eval "$(nodenv init -)"
 
 git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -27,10 +28,3 @@ alias be="bundle exec"
 alias vplug="vim +PlugInstall +qall" # install vim plugins
 
 source ~/dev/dotfiles/git-completion.bash
-
-# after installing nvm (node version manager) via homebrew: https://formulae.brew.sh/formula/nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
-
-export PATH=$PATH:node_modules/.bin
