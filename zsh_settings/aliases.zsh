@@ -1,14 +1,3 @@
-# symlink ~/.bash_profile to the path of this file
-
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-
-git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-export PS1="\[\e[1;36m\]\u \@\[\e[m\] | \[\e[1;35m\]\W\[\e[m$(tput bold)\$(git_branch)\] -> \[$(tput sgr0)\]"
-
 alias gb="git branch"
 alias gco="git checkout"
 alias gnb="git checkout -b"
@@ -26,5 +15,3 @@ alias gplr="git pull --rebase"
 alias be="bundle exec"
 
 alias vplug="vim +PlugInstall +qall" # install vim plugins
-
-source ~/dev/dotfiles/git-completion.bash

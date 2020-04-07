@@ -8,7 +8,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy file searching
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy file searching
 Plug 'junegunn/fzf.vim' " Grepping
 Plug 'scrooloose/nerdtree' " Filetree explorer
 Plug 'tpope/vim-fugitive' " Git blame
