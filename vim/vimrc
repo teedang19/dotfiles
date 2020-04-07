@@ -19,8 +19,9 @@ Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blo
 Plug 'Valloric/YouCompleteMe' " Autocomplete
 Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim' " typescript highlighting
+Plug 'maxmellon/vim-jsx-pretty' " react/jsx highlighting
+Plug 'elixir-editors/vim-elixir' " elixir highlighting
 
 call plug#end()
 " ============================================================================
