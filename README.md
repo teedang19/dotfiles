@@ -35,7 +35,5 @@ Personal dotfiles
 
 # TODO
 - more syntax highlighting
-  - elixir
-  - javascript, coffeescript, typescript
   - yaml
   - css
