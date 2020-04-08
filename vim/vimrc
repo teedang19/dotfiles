@@ -47,6 +47,7 @@ set wildmenu                        " Make tab completion act more like bash
 set wildmode=longest,list,full      " Tab complete to longest common string, like bash
 set completeopt+=longest            " Tab complete type to search
 set switchbuf=useopen               " Don't re-open already opened buffers
+set noeb vb t_vb=.
 
 " Undo
 set undodir=$HOME/.vim-config/undodir
