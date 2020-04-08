@@ -19,6 +19,9 @@ Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blo
 Plug 'Valloric/YouCompleteMe' " Autocomplete
 Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
+Plug 'leafgarland/typescript-vim' " typescript highlighting
+Plug 'maxmellon/vim-jsx-pretty' " react/jsx highlighting
+Plug 'elixir-editors/vim-elixir' " elixir highlighting
 
 call plug#end()
 " ============================================================================
@@ -44,6 +47,7 @@ set wildmenu                        " Make tab completion act more like bash
 set wildmode=longest,list,full      " Tab complete to longest common string, like bash
 set completeopt+=longest            " Tab complete type to search
 set switchbuf=useopen               " Don't re-open already opened buffers
+set noeb vb t_vb=.
 
 " Undo
 set undodir=$HOME/.vim-config/undodir
