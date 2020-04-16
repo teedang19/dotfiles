@@ -1,3 +1,4 @@
+# git
 alias gb="git branch"
 alias gco="git checkout"
 alias gnb="git checkout -b"
@@ -12,6 +13,11 @@ alias grwip="git reset --soft HEAD~1 && git reset"
 alias gl="git log --pretty='%C(cyan)%cd %C(green)%h %C(green bold)%s %Creset%C(yellow)[%cn]' --date=short --graph"
 alias gplr="git pull --rebase"
 
+# ruby
 alias be="bundle exec"
+
+# elixir
+alias mtest="mix test"
+alias mformat="mix format"
 
 alias vplug="vim +PlugInstall +qall" # install vim plugins
