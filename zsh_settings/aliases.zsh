@@ -20,4 +20,7 @@ alias be="bundle exec"
 alias mtest="mix test"
 alias mformat="mix format"
 
+# js
+alias ytest="yarn test"
+
 alias vplug="vim +PlugInstall +qall" # install vim plugins
