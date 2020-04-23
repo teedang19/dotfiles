@@ -65,6 +65,13 @@ autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" when typing 'pry' in a ruby file, automatically switches to full require
+au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
+
+" vim-prettier - formats on on autosave
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 " ============================================================================
 let mapleader=","
 
@@ -135,8 +142,6 @@ command! WA :wa
 command! Wa :wa
 command! QA :qa
 command! Qa :qa
-
-au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
 " ============================================================================
 " Make nerdtree look nice
 let NERDTreeMinimalUI = 1
