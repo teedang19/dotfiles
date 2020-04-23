@@ -24,3 +24,4 @@ alias mformat="mix format"
 alias ytest="yarn test"
 
 alias vplug="vim +PlugInstall +qall" # install vim plugins
+alias vplugu="vim +PlugUpdate +qall" # update all vim plugins

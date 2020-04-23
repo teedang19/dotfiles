@@ -21,6 +21,7 @@ Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
 Plug 'sheerun/vim-polyglot' " language highlighting
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " js formatter
+Plug 'slashmili/alchemist.vim' " elixir magic
 
 call plug#end()
 " ============================================================================
@@ -46,7 +47,8 @@ set wildmenu                        " Make tab completion act more like bash
 set wildmode=longest,list,full      " Tab complete to longest common string, like bash
 set completeopt+=longest            " Tab complete type to search
 set switchbuf=useopen               " Don't re-open already opened buffers
-set noeb vb t_vb=.
+set noeb vb t_vb=.                  " Disable audio + visual bells for errors
+set autoread                        " When files change in-memory, autoread them without the UI prompt
 
 " Undo
 set undodir=$HOME/.vim-config/undodir
@@ -60,18 +62,21 @@ set mouse=a
 
 colorscheme jellybeans
 
-autocmd BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
+autocmd BufNewFile,BufRead {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
-" Remove trailing whitespace
+" Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 " when typing 'pry' in a ruby file, automatically switches to full require
 au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
 
-" vim-prettier - formats on on autosave
+" vim-prettier - formats on save
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" run mix format on save
+autocmd BufWritePost *.exs,*.ex silent :!mix format %
 " ============================================================================
 let mapleader=","
 
@@ -92,7 +97,9 @@ nnoremap <silent> <Leader>b :Buffers<cr>
 " <Leader>ws removes trailing whitespace
 nnoremap <silent> <Leader>ws :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
+" overwrite built-in `s` command for `sj` and `sk`
 " `sj` to toggle single-line block -> multi-line block, `sk` to toggle multi-line -> single line
+nnoremap s <Nop>
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
