@@ -1,8 +1,18 @@
-brew "cmake" # dependency for https://github.com/ycm-core/YouCompleteMe#installation
+brew "rbenv"
+
+# dependencies for https://github.com/ycm-core/YouCompleteMe#installation
+brew "cmake"
+brew "macvim"
+brew "python"
+brew "mono"
+brew "go"
+brew "node"
+
+brew "nodenv"
+brew "yarn"
 brew "ctags"
 brew "elixir"
-brew "macvim"
-brew "node"
-brew "nodenv"
-brew "rbenv"
-brew "yarn"
+brew "the_silver_searcher"
+brew "postgresql"
+brew "tmux"
+brew "tmate"

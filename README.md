@@ -2,16 +2,13 @@ Personal dotfiles
 
 # Getting Started
 
-1. Install [Homebrew](https://brew.sh/)
-
-1. Install [rbenv via homebrew](https://github.com/rbenv/rbenv#homebrew-on-macos)
-
 1. Install [vim-plug](https://github.com/junegunn/vim-plug#vim) to manage vim plugins
 
-1. Install [dependencies for YouCompleteMe](https://github.com/ycm-core/YouCompleteMe#installation), the vim autocomplete plugin
+1. Install [Homebrew](https://brew.sh/)
 
-1. Install [Ag, the silver searcher](https://github.com/ggreer/the_silver_searcher), a dependency for [fzf](https://github.com/junegunn/fzf)
-   `brew install the_silver_searcher`
+1. `brew bundle` from the root of this dir
+
+1. Complile [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe#installation), the vim autocomplete plugin -- the included Brewfile should have installed the necessary dependencies.
 
 1. Clone the repo to your desired location. For me, it's usually ~/dev/dotfiles:
    `git clone git@github.com:teedang19/dotfiles.git ~/dev/dotfiles`
