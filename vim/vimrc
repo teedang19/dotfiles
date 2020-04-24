@@ -19,9 +19,9 @@ Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blo
 Plug 'Valloric/YouCompleteMe' " Autocomplete
 Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
-Plug 'leafgarland/typescript-vim' " typescript highlighting
-Plug 'maxmellon/vim-jsx-pretty' " react/jsx highlighting
-Plug 'elixir-editors/vim-elixir' " elixir highlighting
+Plug 'sheerun/vim-polyglot' " language highlighting
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " js formatter
+Plug 'slashmili/alchemist.vim' " elixir magic
 
 call plug#end()
 " ============================================================================
@@ -47,7 +47,8 @@ set wildmenu                        " Make tab completion act more like bash
 set wildmode=longest,list,full      " Tab complete to longest common string, like bash
 set completeopt+=longest            " Tab complete type to search
 set switchbuf=useopen               " Don't re-open already opened buffers
-set noeb vb t_vb=.
+set noeb vb t_vb=.                  " Disable audio + visual bells for errors
+set autoread                        " When files change in-memory, autoread them without the UI prompt
 
 " Undo
 set undodir=$HOME/.vim-config/undodir
@@ -61,11 +62,21 @@ set mouse=a
 
 colorscheme jellybeans
 
-autocmd BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
+autocmd BufNewFile,BufRead {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
-" Remove trailing whitespace
+" Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" when typing 'pry' in a ruby file, automatically switches to full require
+au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
+
+" vim-prettier - formats on save
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" run mix format on save
+autocmd BufWritePost *.exs,*.ex silent :!mix format %
 " ============================================================================
 let mapleader=","
 
@@ -86,7 +97,9 @@ nnoremap <silent> <Leader>b :Buffers<cr>
 " <Leader>ws removes trailing whitespace
 nnoremap <silent> <Leader>ws :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
+" overwrite built-in `s` command for `sj` and `sk`
 " `sj` to toggle single-line block -> multi-line block, `sk` to toggle multi-line -> single line
+nnoremap s <Nop>
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
@@ -136,8 +149,6 @@ command! WA :wa
 command! Wa :wa
 command! QA :qa
 command! Qa :qa
-
-au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
 " ============================================================================
 " Make nerdtree look nice
 let NERDTreeMinimalUI = 1
@@ -168,16 +179,17 @@ function! OpenNerdTree()
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 " ============================================================================
-" Find the related spec for open ruby files, and vice-versa
+" Find the related spec for open ruby and elixir files, and vice-versa
 function! s:RelatedSpec()
   let l:fullpath = expand("%:p")
   let l:filepath = expand("%:h")
   let l:fname = expand("%:t")
   let l:filepath_without_app = substitute(l:filepath, "app/", "", "")
+  let l:filepath_without_app = substitute(l:filepath, "lib/", "", "")
   let l:filepath_without_app = substitute(l:filepath_without_app, "assets/", "", "")
 
   " Possible names for the spec/test for the file we're looking at
-  let l:test_names = [substitute(l:fname, ".rb$", "_spec.rb", ""), substitute(l:fname, ".rb$", "_test.rb", ""), substitute(l:fname, ".js$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.jsx", "")]
+  let l:test_names = [substitute(l:fname, ".rb$", "_spec.rb", ""), substitute(l:fname, ".rb$", "_test.rb", ""), substitute(l:fname, ".js$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.jsx", ""), substitute(l:fname, ".ex$", "_test.exs", "")]
 
   " Possible paths
   let l:test_paths = ["spec", "fast_spec", "test"]
@@ -197,22 +209,34 @@ endfunction
 function! s:FileRelatedToSpec()
   let l:fullpath = expand("%:p")
   let l:filepath = expand("%:h")
+  let l:fextension = expand("%:e")
   let l:fname = expand("%:t")
 
   let l:related_file = substitute(l:filepath, "fast_spec/", "", "")
   let l:related_file = substitute(l:related_file, "spec/", "", "")
+  let l:related_file = substitute(l:filepath, "test/", "", "")
 
-  let l:related_file_names = [substitute(l:fname, "_spec.rb$", ".rb", ""), substitute(l:fname, "_spec.js$", ".js", ""), substitute(l:fname, "_spec.js$", ".jsx", ""), substitute(l:fname, "_spec.jsx$", ".jsx", "")]
+  if match(l:fextension, "exs") != -1
+    let l:full_file_path = substitute(l:fullpath, "_test.exs$", ".ex", "")
+    let l:full_file_path = substitute(l:full_file_path, "test/", "lib/", "")
 
-  for related_file_name in l:related_file_names
-    let l:full_file_path = substitute(l:fullpath, l:filepath . "/" . l:fname, "app/" . l:related_file . "/" . related_file_name, "")
-    if match(l:full_file_path, "javascripts") != -1
-      let l:full_file_path = substitute(l:full_file_path, "app/", "app/assets/", "")
-    end
     if filereadable(l:full_file_path)
       return l:full_file_path
     end
-  endfor
+  else
+    let l:related_file_names = [substitute(l:fname, "_spec.rb$", ".rb", ""), substitute(l:fname, "_spec.js$", ".js", ""), substitute(l:fname, "_spec.js$", ".jsx", ""), substitute(l:fname, "_spec.jsx$", ".jsx", ""), substitute(l:fname, "_test.exs$", ".ex", "")]
+
+    for related_file_name in l:related_file_names
+      let l:full_file_path = substitute(l:fullpath, l:filepath . "/" . l:fname, "app/" . l:related_file . "/" . related_file_name, "")
+      if match(l:full_file_path, "javascripts") != -1
+        let l:full_file_path = substitute(l:full_file_path, "app/", "app/assets/", "")
+      end
+
+      if filereadable(l:full_file_path)
+        return l:full_file_path
+      end
+    endfor
+  end
 endfunction
 
 " If looking at a regular file, find the related spec
@@ -220,6 +244,8 @@ endfunction
 function! s:RelatedSpecOrFile()
   let l:fname = expand("%:t")
   if match(l:fname, "_spec") != -1
+    let l:result = s:FileRelatedToSpec()
+  elseif match(l:fname, "_test") != -1
     let l:result = s:FileRelatedToSpec()
   else
     let l:result = s:RelatedSpec()
