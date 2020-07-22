@@ -12,6 +12,7 @@ alias gwip="git add . && git commit -m 'WIP'"
 alias grwip="git reset --soft HEAD~1 && git reset"
 alias gl="git log --pretty='%C(cyan)%cd %C(green)%h %C(green bold)%s %Creset%C(yellow)[%cn]' --date=short --graph"
 alias gplr="git pull --rebase"
+alias gsl="git stash list"
 
 # ruby
 alias be="bundle exec"
