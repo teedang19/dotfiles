@@ -22,6 +22,7 @@ Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to fi
 Plug 'sheerun/vim-polyglot' " language highlighting
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " js formatter
 Plug 'slashmili/alchemist.vim' " elixir magic
+Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 " ============================================================================
@@ -42,7 +43,7 @@ set incsearch                       " Find the next match as we type the search
 set hlsearch                        " Highlight searches by default
 set ignorecase                      " Ignore case when searching...
 set smartcase                       " ...unless we type a capital
-set guifont=Menlo\ Regular:h18
+set guifont=Menlo\ Regular:h16
 set wildmenu                        " Make tab completion act more like bash
 set wildmode=longest,list,full      " Tab complete to longest common string, like bash
 set completeopt+=longest            " Tab complete type to search
