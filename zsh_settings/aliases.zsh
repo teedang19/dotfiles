@@ -19,7 +19,9 @@ alias be="bundle exec"
 
 # elixir
 alias mtest="mix test"
+alias prytest="iex -S mix test"
 alias mformat="mix format"
+alias mconsole="iex -S mix"
 
 # js
 alias ytest="yarn test"
