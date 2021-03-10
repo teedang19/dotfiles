@@ -17,7 +17,7 @@ Plug 'tpope/vim-repeat' " Allows . to repeat other custom commands
 Plug 'tomtom/tcomment_vim' " Comment toggling
 Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blocks
 Plug 'Valloric/YouCompleteMe' " Autocomplete
-" Plug 'lifepillar/vim-mucomplete'
+Plug 'vim-scripts/YankRing.vim' " Yank history
 Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
 Plug 'sheerun/vim-polyglot' " language highlighting
@@ -61,13 +61,6 @@ set undoreload=10000
 " Use system clipboard
 set clipboard+=unnamed                     " Set system clipboard
 set mouse=a
-
-" lifepillar/vim-mucomplete settings
-" set completeopt+=menuone
-" set completeopt+=noselect
-" set shortmess+=c   " Shut off completion messages
-" set belloff+=ctrlg " If Vim beeps during completion
-" let g:mucomplete#enable_auto_at_startup = 1
 
 colorscheme jellybeans
 
@@ -128,6 +121,11 @@ map <silent> // :nohlsearch<CR>
 map <Leader>jm :FZF app/models<CR>
 map <Leader>jc :FZF app/controllers<CR>
 map <Leader>jv :FZF app/views<CR>
+
+" Yankring settings
+let g:yankring_history_file = '.yankring-history'
+nnoremap ,yr :YRShow<CR>
+nnoremap C-y :YRShow<CR>
 
 " Leader+ff to fuzzy file search the word under the cursor ("find-file")
 nnoremap <Leader>ff :FzfTagsCurrWord<CR>
@@ -198,7 +196,7 @@ function! s:RelatedSpec()
   let l:filepath_without_app = substitute(l:filepath_without_app, "assets/", "", "")
 
   " Possible names for the spec/test for the file we're looking at
-  let l:test_names = [substitute(l:fname, ".rb$", "_spec.rb", ""), substitute(l:fname, ".rb$", "_test.rb", ""), substitute(l:fname, ".js$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.jsx", ""), substitute(l:fname, ".ex$", "_test.exs", "")]
+  let l:test_names = [ substitute(l:fname, ".rb$", "_spec.rb", ""), substitute(l:fname, ".rb$", "_test.rb", ""), substitute(l:fname, ".js$", "_spec.js", ""), substitute(l:fname, ".js$", ".test.js", ""), substitute(l:fname, ".jsx$", "_spec.js", ""), substitute(l:fname, ".jsx$", "_spec.jsx", ""), substitute(l:fname, ".ex$", "_test.exs", "")]
 
   " Possible paths
   let l:test_paths = ["spec", "fast_spec", "test"]
@@ -211,6 +209,14 @@ function! s:RelatedSpec()
         return l:full_spec_path
       end
     endfor
+
+    " finds js specs in the following pattern:
+    " path/component.js -> path/__test__/component.test.js
+    let l:test_name = substitute(l:fname, ".js", ".test.js", "")
+    let l:full_spec_path = substitute(l:fullpath, l:fname, "__test__/" . l:test_name, "")
+    if filereadable(l:full_spec_path)
+      return l:full_spec_path
+    end
   endfor
 endfunction
 

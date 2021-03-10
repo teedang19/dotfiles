@@ -17,3 +17,4 @@ zeus.json
 deps/
 node_modules/
 assets/node_modules
+.yankring-history
