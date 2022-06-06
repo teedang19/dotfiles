@@ -16,6 +16,7 @@ alias gsl="git stash list"
 
 # ruby
 alias be="bundle exec"
+alias berc="bundle exec rails c"
 
 # elixir
 alias mtest="mix test"
