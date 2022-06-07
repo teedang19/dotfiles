@@ -17,13 +17,12 @@ Plug 'tpope/vim-repeat' " Allows . to repeat other custom commands
 Plug 'tomtom/tcomment_vim' " Comment toggling
 Plug 'AndrewRadev/splitjoin.vim' " Quick toggling of single- and multi- line blocks
 Plug 'ycm-core/YouCompleteMe' " Autocomplete
-" Plug 'lifepillar/vim-mucomplete'
 Plug 'dense-analysis/ale' " Async Lint Engine
 Plug 'vim-scripts/matchit.zip' " Extends matchit for a variety of langs (% to find corresponding do/end)
 Plug 'sheerun/vim-polyglot' " language highlighting
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " js formatter
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } " js formatter
 Plug 'slashmili/alchemist.vim' " elixir magic
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides' " toggles vertical indent lines
 
 call plug#end()
 " ============================================================================
@@ -62,13 +61,6 @@ set undoreload=10000
 set clipboard+=unnamed                     " Set system clipboard
 set mouse=a
 
-" lifepillar/vim-mucomplete settings
-" set completeopt+=menuone
-" set completeopt+=noselect
-" set shortmess+=c   " Shut off completion messages
-" set belloff+=ctrlg " If Vim beeps during completion
-" let g:mucomplete#enable_auto_at_startup = 1
-
 colorscheme jellybeans
 
 autocmd BufNewFile,BufRead {Gemfile,Rakefile,Capfile,*.rake,config.ru,*.god} set ft=ruby
@@ -80,9 +72,13 @@ autocmd BufWritePre * :%s/\s\+$//e
 " when typing 'pry' in a ruby file, automatically switches to full require
 au BufReadPost,BufNewFile *.rb iabbrev pry require 'pry'; binding.pry
 
-" vim-prettier - formats on save
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+" " vim-prettier - formats on save
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" ale
+let g:ale_fixers = {'javascript': ['prettier'], 'scss': ['prettier'], 'ruby': ['rubocop'], 'typescript': ['prettier']}
+let g:ale_fix_on_save = 1
 
 " run mix format on save
 autocmd BufWritePost *.exs,*.ex silent :!mix format %
