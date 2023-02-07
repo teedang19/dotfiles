@@ -2,7 +2,7 @@ brew "rbenv"
 
 # dependencies for https://github.com/ycm-core/YouCompleteMe#installation
 brew "cmake"
-brew "macvim"
+cask "macvim"
 brew "python"
 brew "mono"
 brew "go"
