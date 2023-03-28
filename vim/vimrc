@@ -131,6 +131,7 @@ command! FzfTagsCurrWord call s:FzfTagsCurrWord()
 function! s:FzfTagsCurrWord()
   call fzf#vim#tags(expand('<cword>'))
 endfunction
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " copy current filename (cf: fullpath, cr: relative path, cn: filename) into system clipboard
 nnoremap <silent> <Leader>cf :let @* = expand("%:~")<CR>
